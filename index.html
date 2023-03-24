@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+</html>
+<script>
+
+    class ElectricLamp {
+        constructor(name) {
+            this.name = name;
+            this.status = false;
+        }
+
+        getStatus() {
+            return this.status;
+        }
+
+        turnOff() {
+            this.status = false;
+            console.log(`${this.name} da tat`);
+        }
+
+        turnOn() {
+            this.status = true;
+            console.log(`${this.name} da bat`);;
+        }
+    }
+
+    class SwitchButton {
+        constructor(name, eLamp) {
+            this.name = name;
+            this.status = false;
+            this.eLamp = eLamp;
+        }
+
+        getStatus() {
+            return this.status;
+        }
+
+        connectToLamp(eLamp) {
+            this.eLamp = eLamp;
+        }
+
+
+        switchOff(eLamp) {
+            if (this.eLamp === eLamp) {
+                this.status = false;
+                return eLamp.turnOff();
+            } else {
+                console.log(`${this.name} chua duoc ket noi voi ${eLamp.name}`);
+            }
+        }
+
+        switchOn(eLamp) {
+            if (this.eLamp === eLamp) {
+                this.status = true;
+                return eLamp.turnOn();
+            } else {
+                console.log(`${this.name} chua duoc ket noi voi ${eLamp.name}`);
+            }
+        }
+    }
+
+    let lamp_1 = new ElectricLamp('lamp1');
+    let lamp_2 = new ElectricLamp('lamp2');
+    let btn_1 = new SwitchButton('btn1', lamp_2);
+    console.log(btn_1)
+    btn_1.switchOn(lamp_1);
+    btn_1.connectToLamp(lamp_1);
+    btn_1.switchOn(lamp_1);
+    btn_1.switchOn(lamp_2);
+    console.log(btn_1.getStatus());
+    console.log(lamp_2.getStatus());
+    console.log(lamp_1.getStatus());
+</script>
